@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import { CSSTransitionGroup } from 'react-transition-group'
+
+import './article.css'
 
 import CommentsList from './CommentsList'
 
-
+ 
 class Article extends Component {
 	static propTypes = {
 		article: PropTypes.shape({
@@ -14,7 +17,7 @@ class Article extends Component {
 	}
 
 	render() {
-		const {article, isOpen, toggleOpen} = this.props;
+		const {article , isOpen, toggleOpen} = this.props;
 
 		return (
 			<div ref={this.setContainerRef}>
@@ -22,7 +25,13 @@ class Article extends Component {
 				<button onClick={ toggleOpen(article.id) }>
 					{ isOpen ? 'close' : 'open' }
 				</button>
-				{ this.getBody() }
+				<CSSTransitionGroup
+					transitionName='article'
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={300}				 
+				>
+					{ this.getBody() }
+				</CSSTransitionGroup>
 			</div>
 		)
 	}
@@ -38,10 +47,10 @@ class Article extends Component {
 		if (!isOpen) return null
 
 		return (
-			<div>
-				<selection>{ article.text }</selection>
+			<selection>
+				{ article.text }
 				<CommentsList {...{comments}} />
-			</div>
+			</selection>
 		)
 	}
 }

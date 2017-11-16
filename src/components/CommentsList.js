@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
 import Comment from './Comment'
+import CommentForm from './CommentForm'
+
 import toggleOpen from '../decorators/toggleOpen'
 
 
 const CommentsList = ({comments=[], isOpen, toggleOpen}) => {
 	return (
 		<div>
+			<CommentForm />
 			<button onClick={toggleOpen}>
 				{ isOpen ? 'close': 'open'} commen
 			</button>
