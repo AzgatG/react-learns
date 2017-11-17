@@ -6,23 +6,23 @@ import accordion from '../decorators/accordion'
 
 class ArticleList extends React.Component {
   render() {
-		const { articles, openItemId, toogleOpenItem} = this.props
+    const { articles, openItemId, toogleOpenItem} = this.props
     const articleElements = articles.map(article => {
-    	return (
-    		<li key = {article.id}>
-    			<Article
-    				article={article}
-    				isOpen = {article.id === openItemId}
-    				toggleOpen = {toogleOpenItem}
-    			/>
-    		</li>
-    	)
+      return (
+        <li key = {article.id}>
+          <Article
+            article = {article}
+            isOpen = {article.id === openItemId}
+            toggleOpen = {toogleOpenItem}
+          />
+        </li>
+      )
     })
 
     return (
-    		<ul>
-    			{ articleElements }
-    		</ul>
+      <ul>
+        { articleElements }
+      </ul>
     )
   }
 }
