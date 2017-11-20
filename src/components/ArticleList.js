@@ -1,12 +1,12 @@
 import React from 'react';
 import Article from './Article';
 
-import accordion from '../decorators/accordion'
-import {connect} from 'react-redux'
+import accordion from '../decorators/accordion';
+import {connect} from 'react-redux';
 
 class ArticleList extends React.Component {
   render() {
-    const { articles, openItemId, toogleOpenItem} = this.props
+    const { articles, openItemId, toogleOpenItem } = this.props;
     const articleElements = articles.map(article => {
       return (
         <li key = {article.id}>
@@ -16,17 +16,28 @@ class ArticleList extends React.Component {
             toggleOpen = {toogleOpenItem}
           />
         </li>
-      )
-    })
+      );
+    });
 
     return (
       <ul>
         { articleElements }
       </ul>
-    )
+    );
   }
 }
 
-export default connect(state => ({
-  articles: state.articles
-}))(accordion(ArticleList))
+export default connect(({articles, filter}) => {
+  const {selected, dateRange: {from, to}} = filter;
+
+  let mapSelected = selected.map( select => select.value );
+
+  let filteredArticles = articles.filter( article => {
+    if (mapSelected.length) return mapSelected.indexOf(article.id) > -1;
+    return true;
+  });
+
+  return({
+    articles: filteredArticles
+  });
+})(accordion(ArticleList));

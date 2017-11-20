@@ -1,22 +1,22 @@
-import {articles as defaultArticles} from '../fixtures'
-import {CHANGE_SELECTION, DATE_RANGE} from '../constants'
+import {CHANGE_SELECTION, DATE_RANGE} from '../constants';
 
-const defaultFilters = {
-    selected: [],
-    dateRange: {
-        from: null,
-        to: null
-    }
-}
+
+const defaultFilter = {
+  selected: [],
+  dateRange: {
+    from: null,
+    to: null
+  }
+};
 
 export default (filter = defaultFilter, action) => {
-  const {type, payload} = action
-  
-  switch (type) {
-    case CHANGE_SELECTION: {...filter, };
+  const {type, payload} = action;
 
-    case DATE_RANGE: console.log(payload);
+  switch (type) {
+  case CHANGE_SELECTION: return {...filter, selected: payload.selected};
+
+  case DATE_RANGE: return {...filter, dateRange: payload.dateRange};
   }
 
-  return filter
-}
+  return filter;
+};
