@@ -2,8 +2,7 @@ import React from 'react';
 // components
 import ArticleList from './ArticleList'
 // import UserForm from './UserForm'
-// import Calendar from './Calendar'
-// import HandleSelect from './HandleSelect'
+import Filter from './Filter'
 import Counter from './Counter'
 
 
@@ -12,8 +11,7 @@ export default function App({articles}) {
     <div>
       {/*<Counter />*/}
       {/*<UserForm />*/}
-      {/*<Calendar />*/}
-      {/*<HandleSelect articles = {articles} />*/}
+      {<Filter />}
       <ArticleList />
     </div>
   );

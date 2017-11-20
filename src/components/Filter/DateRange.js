@@ -4,7 +4,7 @@ import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 
-export default class Calendar extends React.Component {
+export default class DateRange extends React.Component {
 	static defaultProps = {
 	  numberOfMonths: 2,
 	};
