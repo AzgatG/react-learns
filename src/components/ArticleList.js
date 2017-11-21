@@ -33,8 +33,9 @@ export default connect(({articles, filter}) => {
   let mapSelected = selected.map( select => select.value );
 
   let filteredArticles = articles.filter( article => {
-    if (mapSelected.length) return mapSelected.indexOf(article.id) > -1;
-    return true;
+    let published = Date.parse(article.date);
+    return (!mapSelected.length || mapSelected.includes(article.id)) &&
+            (!from || !to || (published > from && published < to))
   });
 
   return({
