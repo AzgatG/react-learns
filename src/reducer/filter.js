@@ -13,9 +13,9 @@ export default (filter = defaultFilter, action) => {
   const {type, payload} = action;
 
   switch (type) {
-  case CHANGE_SELECTION: return {...filter, selected: payload.selected};
+    case CHANGE_SELECTION: return {...filter, selected: payload.selected};
 
-  case DATE_RANGE: return {...filter, dateRange: payload.dateRange};
+    case DATE_RANGE: return {...filter, dateRange: payload.dateRange};
   }
 
   return filter;

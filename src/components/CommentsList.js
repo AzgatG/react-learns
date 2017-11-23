@@ -25,8 +25,8 @@ const getBody = ({comments, isOpen}) => {
   return (
     <ul>
       { 
-        comments.map( comment => {
-          return <Comment key={comment.id} {...comment} />
+        comments.map( id => {
+          return <Comment key = {id} id = {id} />
         })
       }
     </ul>

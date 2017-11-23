@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 
 
-const Comment = ({text, user}) => <li>{text}</li>
-
-Comment.propTypes = {
-  text: PropTypes.string,
-  user: PropTypes.string
+const Comment = ({comment:{text, user}}) => {
+  return <li>{text} <b>by {user}</b></li>
 }
 
-export default Comment
+Comment.propTypes = {
+  comment: PropTypes.object,
+  // from connect
+  id: PropTypes.string.isRequired,
+}
+
+export default connect((state, ownProps) => {
+  const comment = state.comments.find(comment => comment.id === ownProps.id)
+  return {
+    comment
+  }
+})(Comment)
