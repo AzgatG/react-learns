@@ -3,13 +3,13 @@ import React from 'react';
 import ArticleList from './ArticleList';
 // import UserForm from './UserForm'
 import Filter from './Filter';
-// import Counter from './Counter';
+import Counter from './Counter';
 
 
 export default function App({articles}) {
   return (
     <div>
-      {/*<Counter />*/}
+      {<Counter />}
       {/*<UserForm />*/}
       {<Filter />}
       <ArticleList />

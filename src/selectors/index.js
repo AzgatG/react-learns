@@ -3,10 +3,13 @@ import {createSelector} from 'reselect'
 
 const filtersGetter = state => state.filter;
 const articlesGetter = state => state.articles;
+const commentGetter = state => state.comments;
+const idGetter = (state, props) => props.id;
 
 export const filtratedArticlesSelector = createSelector(articlesGetter , filtersGetter, (articles, filter) => {
   const {selected, dateRange: {from, to}} = filter;
-  console.log('----', 'recomputing');
+  console.log('getting articles');
+
   let mapSelected = selected.map( select => select.value );
 
   return articles.filter( article => {
@@ -14,4 +17,12 @@ export const filtratedArticlesSelector = createSelector(articlesGetter , filters
     return (!mapSelected.length || mapSelected.includes(article.id)) &&
             (!from || !to || (published > from && published < to))
   });
+})
+
+export const commentsSelectorFactory = () => createSelector(
+  commentGetter,
+  idGetter,
+  (comments, id) => {
+    console.log('getting comments');
+    return comments.find( comment => comment.id === id )
 })
