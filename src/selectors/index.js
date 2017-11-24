@@ -1,8 +1,11 @@
 import {createSelector} from 'reselect'
+// мемоизация
 
-
+// геттеры для реселекста
+// for articles
 const filtersGetter = state => state.filter;
 const articlesGetter = state => state.articles;
+// for comments
 const commentGetter = state => state.comments;
 const idGetter = (state, props) => props.id;
 
@@ -24,5 +27,5 @@ export const commentsSelectorFactory = () => createSelector(
   idGetter,
   (comments, id) => {
     console.log('getting comments');
-    return comments.find( comment => comment.id === id )
+    return comments[id]
 })
