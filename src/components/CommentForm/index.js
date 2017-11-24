@@ -1,9 +1,11 @@
 import React from 'react';
-
+import {connect} from 'react-redux'
+// action
+import {addComment} from '../../AC'
 import './style.css'
 
 
-export default class CommentForm extends React.Component {
+class CommentForm extends React.Component {
   constructor(props) {
     super(props)
 
@@ -36,7 +38,9 @@ export default class CommentForm extends React.Component {
 
   handleSubmit = ev => {
     ev.preventDefault()
-    this.setState(this.getInitialState());
+    const {addComment, articleId} = this.props
+    addComment({...this.state}, articleId)
+    this.getInitialState()
   }
 
   handleChange = type => ev => {
@@ -51,6 +55,8 @@ export default class CommentForm extends React.Component {
     return this.state[type].length && this.state[type].length < limit[type].min ? 'form-input__error' : ''
   }
 }
+
+export default connect(null, { addComment })(CommentForm)
 
 const limit = {
   user: {

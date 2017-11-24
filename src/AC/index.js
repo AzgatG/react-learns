@@ -1,4 +1,10 @@
-import {DELETE_ARTICLE, INCREMENT, CHANGE_SELECTION, DATE_RANGE} from '../constants';
+import {
+  DELETE_ARTICLE,
+  INCREMENT,
+  CHANGE_SELECTION,
+  DATE_RANGE,
+  ADD_COMMENT
+} from '../constants';
 
 export function increment() {
   return {
@@ -24,5 +30,13 @@ export function changeDate(dateRange) {
   return {
     type: DATE_RANGE,
     payload: { dateRange }
+  };
+}
+
+export function addComment(comment, articleId) {
+  return {
+    type: ADD_COMMENT,
+    payload: { comment, articleId },
+    generateId: true
   };
 }

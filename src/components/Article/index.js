@@ -42,7 +42,6 @@ class Article extends Component {
   handleOnclick = () => {
     const {deleteArticle, article} = this.props
     deleteArticle(article.id)
-
   }
 
   setContainerRef = ref => {
@@ -58,7 +57,7 @@ class Article extends Component {
     return (
       <selection>
         { article.text }
-        <CommentsList {...{comments}} />
+        <CommentsList {...{comments}} articleId = {article.id}/>
       </selection>
     )
   }

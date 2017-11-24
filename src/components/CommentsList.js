@@ -6,10 +6,10 @@ import CommentForm from './CommentForm'
 import toggleOpen from '../decorators/toggleOpen'
 
 
-const CommentsList = ({comments=[], isOpen, toggleOpen}) => {
+const CommentsList = ({comments=[], isOpen, toggleOpen, articleId}) => {
   return (
     <div>
-      <CommentForm />
+      <CommentForm articleId = {articleId} />
       <button onClick={toggleOpen}>
         { isOpen ? 'close': 'open'} commen
       </button>

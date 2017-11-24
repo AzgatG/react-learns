@@ -1,4 +1,5 @@
 import {createSelector} from 'reselect'
+import {mapToArr} from '../helpers'
 // мемоизация
 
 // геттеры для реселекста
@@ -15,7 +16,7 @@ export const filtratedArticlesSelector = createSelector(articlesGetter , filters
 
   let mapSelected = selected.map( select => select.value );
 
-  return articles.filter( article => {
+  return mapToArr(articles).filter( article => {
     let published = Date.parse(article.date);
     return (!mapSelected.length || mapSelected.includes(article.id)) &&
             (!from || !to || (published > from && published < to))
