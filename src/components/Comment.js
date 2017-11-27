@@ -5,8 +5,9 @@ import {connect} from 'react-redux'
 import {commentsSelectorFactory} from '../selectors'
 
 
-const Comment = ({comment:{text, user}}) => {
-  return <li>{text} <b>by {user}</b></li>
+const Comment = ({comment}) => {
+  if (comment) return <li>{comment.text} <b>by {comment.user}</b></li>
+  return null
 }
 
 Comment.propTypes = {

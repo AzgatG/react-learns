@@ -9,6 +9,7 @@ import {
   START,
   SUCCESS,
   FAIL,
+  LOAD_COMMENTS,
 } from '../constants';
 
 export function increment() {
@@ -46,6 +47,7 @@ export function addComment(comment, articleId) {
   };
 }
 
+// Загрузка всех статей
 export function loadAllArticles() {
   return {
     type: LOAD_ALL_ARTICLES,
@@ -53,7 +55,8 @@ export function loadAllArticles() {
   };
 }
 
-// redux-thunk миделвара - если передать ф-ю 
+// redux-thunk миделвара - если передать ф-ю
+// Загрузка статьи 
 export function loadArticle(id) {
   return (dispatch) => {
     dispatch({
@@ -71,6 +74,29 @@ export function loadArticle(id) {
         .catch( error => dispatch({
           type: LOAD_ARTICLE + FAIL,
           payload: { id, error }
+        }))
+    }, 1000)
+  }
+}
+
+// Загрузка комментариев
+export function loadComments(articleId) {
+  return (dispatch) => {
+    dispatch({
+      type: LOAD_COMMENTS + START,
+      payload: { articleId }
+    })
+
+    setTimeout(() => {
+      fetch(`/api/comment?article=${articleId}`)
+        .then( res => res.json())
+        .then( responce => dispatch({
+          type: LOAD_COMMENTS + SUCCESS,
+          payload: { articleId, responce }
+        }))
+        .catch( error => dispatch({
+          type: LOAD_COMMENTS + FAIL,
+          payload: { articleId, error }
         }))
     }, 1000)
   }

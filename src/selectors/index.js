@@ -26,5 +26,5 @@ export const commentsSelectorFactory = () => createSelector(
   commentGetter,
   idGetter,
   (comments, id) => {
-    return comments[id]
+    return comments.entities.get(id)
 })

@@ -64,7 +64,12 @@ class Article extends Component {
     return (
       <selection>
         { article.text }
-        <CommentsList {...{comments}} articleId = {article.id}/>
+        <CommentsList
+          {...{comments}}
+          articleId = {article.id}
+          commentsLoaded = {article.commentsLoaded}
+          commentsLoading = {article.commentsLoading}
+        />
       </selection>
     )
   }
