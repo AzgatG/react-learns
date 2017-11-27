@@ -6,7 +6,9 @@ import {connect} from 'react-redux'
 import './style.css'
 
 import CommentsList from '../CommentsList'
-import {deleteArticle} from '../../AC'
+import Loader  from '../Loader'
+
+import {deleteArticle, loadArticle} from '../../AC'
 
  
 class Article extends Component {
@@ -16,6 +18,10 @@ class Article extends Component {
       title: PropTypes.string.isRequired,
       text: PropTypes.string
     })
+  }
+
+  componentWillReceiveProps({isOpen, loadArticle, article}) {
+    if (isOpen && !article.text && !article.loading) loadArticle(article.id)
   }
 
   render() {
@@ -50,6 +56,7 @@ class Article extends Component {
 
   getBody = () => {
     const {article, isOpen} = this.props;
+    if (article.loading) return <Loader />
     const {comments} = article;
     
     if (!isOpen) return null
@@ -63,4 +70,4 @@ class Article extends Component {
   }
 }
 
-export default connect(null, { deleteArticle })(Article )
+export default connect(null, { deleteArticle, loadArticle })(Article )

@@ -1,5 +1,6 @@
 import React from 'react';
 import Article from './Article';
+import Loader from './Loader';
 import {connect} from 'react-redux';
 
 // decorator
@@ -12,12 +13,15 @@ import {loadAllArticles} from '../AC'
 
 class ArticleList extends React.Component {
   componentDidMount() {
-    this.props.loadAllArticles()
+    const {loading, loaded, loadAllArticles} = this.props
+    if (!loading || !loaded) loadAllArticles()
   }
 
   render() {
-    console.log('----', 'update article list');
-    const { articles, openItemId, toogleOpenItem } = this.props;
+    const { articles, openItemId, toogleOpenItem, loading } = this.props;
+
+    if (loading) return <Loader />
+
     const articleElements = articles.map(article => {
       return (
         <li key = {article.id}>
@@ -40,6 +44,8 @@ class ArticleList extends React.Component {
 
 export default connect((state) => {
   return { 
-    articles: filtratedArticlesSelector(state)
+    articles: filtratedArticlesSelector(state),
+    loading: state.articles.loading,
+    loaded: state.articles.loaded,
   };
 }, { loadAllArticles })(accordion(ArticleList));

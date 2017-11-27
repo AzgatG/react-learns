@@ -33,6 +33,6 @@ class FilterSelect extends React.Component {
 }
 
 export default connect(({articles, filter}) => ({
-  articles: mapToArr(articles),
+  articles: mapToArr(articles.entities),
   selected: filter.selected
 }), { changeSelected })(FilterSelect)
