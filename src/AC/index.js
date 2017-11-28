@@ -39,13 +39,13 @@ export function changeDate(dateRange) {
   };
 }
 
-export function addComment(comment, articleId) {
-  return {
-    type: ADD_COMMENT,
-    payload: { comment, articleId },
-    generateId: true
-  };
-}
+// export function addComment(comment, articleId) {
+//   return {
+//     type: ADD_COMMENT,
+//     payload: { comment, articleId },
+//     generateId: true
+//   };
+// }
 
 // Загрузка всех статей
 export function loadAllArticles() {
@@ -100,4 +100,21 @@ export function loadComments(articleId) {
         }))
     }, 1000)
   }
+}
+
+// add comment
+export function addComment(comment, articleId) {
+  return dispatch => {
+    setTimeout(() => {
+      fetch('/api/comment', {
+        method: 'POST',
+        body: JSON.stringify(comment)
+      })
+        .then( res => res.json())
+        .then( responce => ({
+          type: ADD_COMMENT,
+          payload: { articleId, responce }
+        }))
+    }, 1000)
+  };
 }

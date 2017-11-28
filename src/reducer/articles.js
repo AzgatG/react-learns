@@ -39,7 +39,7 @@ export default (articlesState = defaultState, action) => {
     case ADD_COMMENT:
       const {articleId} = payload;
       return articlesState.updateIn(['entities', articleId, 'comments'], comments => {
-        return comments.concat(randomId)
+        return comments.concat(payload.responce.id)
       })
 
     case LOAD_ALL_ARTICLES + SUCCESS:

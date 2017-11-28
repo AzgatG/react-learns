@@ -14,7 +14,7 @@ import {loadAllArticles} from '../AC'
 class ArticleList extends React.Component {
   componentDidMount() {
     const {loading, loaded, loadAllArticles} = this.props
-    if (!loading || !loaded) loadAllArticles()
+    if (!loading && !loaded) loadAllArticles()
   }
 
   render() {
