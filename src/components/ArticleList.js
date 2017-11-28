@@ -1,10 +1,8 @@
 import React from 'react';
-import Article from './Article';
+import {NavLink} from 'react-router-dom'
+// components
 import Loader from './Loader';
 import {connect} from 'react-redux';
-
-// decorator
-import accordion from '../decorators/accordion';
 // reselect
 import {filtratedArticlesSelector} from '../selectors'
 // AC
@@ -18,18 +16,14 @@ class ArticleList extends React.Component {
   }
 
   render() {
-    const { articles, openItemId, toogleOpenItem, loading } = this.props;
+    const { articles, loading } = this.props;
 
     if (loading) return <Loader />
 
     const articleElements = articles.map(article => {
       return (
         <li key = {article.id}>
-          <Article
-            article = {article}
-            isOpen = {article.id === openItemId}
-            toggleOpen = {toogleOpenItem}
-          />
+          <NavLink to = {`/articles/${article.id}`} activeStyle = {{color: 'red'}}>{article.title}</NavLink>
         </li>
       );
     });
@@ -48,4 +42,4 @@ export default connect((state) => {
     loading: state.articles.loading,
     loaded: state.articles.loaded,
   };
-}, { loadAllArticles })(accordion(ArticleList));
+}, { loadAllArticles })(ArticleList);

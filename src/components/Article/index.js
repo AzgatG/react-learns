@@ -13,25 +13,27 @@ import {deleteArticle, loadArticle} from '../../AC'
  
 class Article extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     article: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      title: PropTypes.string,
       text: PropTypes.string
     })
   }
 
-  componentWillReceiveProps({isOpen, loadArticle, article}) {
-    if (isOpen && !article.text && !article.loading) loadArticle(article.id)
+  componentDidMount() {
+    const {loadArticle, article, id} = this.props
+    if (!article || (!article.text && !article.loading)) loadArticle(id)
   }
 
   render() {
-    const {article , isOpen, toggleOpen} = this.props;
-
+    const {article, isOpen, toggleOpen} = this.props;
+    if (!article) return null
     return (
       <div ref={this.setContainerRef}>
         <h3>{ article.title }</h3>
-        <button onClick={ toggleOpen(article.id) }>
-          { isOpen ? 'close' : 'open' }
+        <button onClick={ toggleOpen }>
+           { isOpen ? 'close' : 'open' }
         </button>
         <button onClick={this.handleOnclick}>Delete</button>
         <CSSTransitionGroup
@@ -75,4 +77,6 @@ class Article extends Component {
   }
 }
 
-export default connect(null, { deleteArticle, loadArticle })(Article )
+export default connect((state, ownProps) =>({
+  article: state.articles.entities.get(ownProps.id)
+}), { deleteArticle, loadArticle })(Article )
