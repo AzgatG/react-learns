@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {HashRouter as Router, Route, NavLink} from 'react-router-dom'
+import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 // components
 import Articles from './routes/Articles';
 // import UserForm from './UserForm'

@@ -10,6 +10,7 @@ export default class Articles extends Component {
 		return (
 			<div>
 				<ArticleList />
+				<Route path = '/articles' render = {this.getIndex} exact />
 				<Route path = '/articles/:id' render = {this.getArticle} />
 			</div>
 		);
@@ -18,5 +19,9 @@ export default class Articles extends Component {
 	getArticle = ({match}) => {
 		const {id} = match.params
 		return <Article  id = {id} isOpen key = {id} />
+	}
+
+	getIndex = () => {
+		return <h2>Выберите статью</h2>
 	}
 }
